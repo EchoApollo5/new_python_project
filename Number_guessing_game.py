@@ -4,7 +4,6 @@ print("you have 10 tries")
 
 def computer_number():
     computer_num = random.randint(1, 100)
-    computer_num = int(computer_num)
     return (computer_num)
 
 
@@ -13,13 +12,12 @@ def human_input():
         guess = input("guess a number from 1 to 100: ")
         if guess.isdigit():
             guess= int(guess)
-            if 1 > guess or guess < 100:
-                print('Enter a value inside the correct range: ')
+            if 1 <= guess <= 100:
+                return(guess)
             else: 
-                break
+                print('Enter a value inside the correct range: ')
         else:
             print("invalid input")
-    return(guess)
 
 def difficulty():
     while True:
@@ -46,27 +44,23 @@ def difficulty():
 def guessing(number):
     count = 0
     attempts = difficulty()
-    condition = True
+    won = False
     while count < attempts:
         guess = human_input()
         if guess == number:
             print("you guessed it")
-            condition = True
+            won = True
             break
         elif guess < number:
             print("its bigger")
-            inv_count = (attempts - count)-1
-            print(f"you have {inv_count} attempts left")
-            count += 1
-            condition = False
         elif guess > number:
             print("its smaller")
-            inv_count = (attempts - count)-1
-            print(f"you have {inv_count} attempts left")
-            count += 1
-            condition = False
+        count += 1
+        inv_count = (attempts - count)
+        print(f"you have {inv_count} attempts left")
+        
 
-    if condition:
+    if won:
         print('you won')
     else:
         print(f'you lost, the number was {number}')
@@ -76,8 +70,8 @@ def main():
     while True:
         number = computer_number()
         guessing(number)
-        play_again = input(str('do you want to play again, (yes or no): ')).lower()
-        if play_again == "yes" or play_again == "no":
+        play_again = input('do you want to play again, (yes or no): ').lower()
+        if play_again in ('yes', 'no'):
             if play_again == 'no':
                 break
         else:

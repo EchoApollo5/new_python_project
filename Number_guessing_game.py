@@ -13,29 +13,40 @@ def human_input():
         guess = input("guess a number from 1 to 100: ")
         if guess.isdigit():
             guess= int(guess)
-            if guess > 100:
+            if 1 > guess or guess < 100:
                 print('Enter a value inside the correct range: ')
-            break
+            else: 
+                break
         else:
             print("invalid input")
     return(guess)
 
+def difficulty():
+    while True:
+        choice = input("how difficult would you like the game to be, (1, 2, 3): ")
+        if choice.isdigit():
+            choice = int(choice)
+            if choice == 1:
+                attempts = 10
+                break
+            elif choice == 2:
+                attempts = 5
+                break
+            elif choice == 3:
+                attempts = 1
+                break
+            else:
+                print('enter a valid value')
+        else:
+            print('enter a number')
+        
+    return (attempts)   
+
 
 def guessing(number):
     count = 0
-    def difficulty():
-        choice = input("how difficult would you like the game to be, (1, 2, 3): ")
-        if choice.isdigit:
-            if choice == 1:
-                attempts = 10
-            elif choice == 2:
-                attempts = 5
-            elif choice == 3:
-                attempts = 1
-        return (attempts)
-    
     attempts = difficulty()
-    condition = 0
+    condition = True
     while count < attempts:
         guess = human_input()
         if guess == number:
@@ -65,17 +76,11 @@ def main():
     while True:
         number = computer_number()
         guessing(number)
-        play_again = input('do you want to play again, (yes or no): ')
-        if play_again == "yes" or "no":
+        play_again = input(str('do you want to play again, (yes or no): ')).lower()
+        if play_again == "yes" or play_again == "no":
             if play_again == 'no':
                 break
         else:
             print("please enter a valid answer")
             
-        
-        
-
-
-
 main()
-
